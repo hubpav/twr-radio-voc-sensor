@@ -15,6 +15,14 @@ Connect Core Module via USB cable. Make CPU waiting for DFU (on Core Module pres
 
 Type `Ctrl + P` then `task dfu` then `<Enter>`.
 
+## Flash MCU via JLink and Debug
+
+- Connect JLink (JTAG/SWD connector on Core Module - JLink and Jlink USB - PC USB)
+- Open `application.c` (e.g. `Ctrl + Shift + E` to switch to Explorer view and select `app application.c`)
+- Build (e.g. `Ctrl + Shift + B`)
+- Type `Ctrl + Shift + D` to switch to debug view, set some breakpoints by hitting `F9`
+- Hit `F5` to start debugging
+
 ## Terminal on COM port
 
 ``Ctrl + ` `` (or `Ctrl + Shift + P to term <Enter>`) to open terminal window.
