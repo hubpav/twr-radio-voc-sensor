@@ -17,6 +17,7 @@
                 "program": "${workspaceRoot}\\out\\firmware.elf",
                 "miDebuggerPath": "${env:SystemDrive}\\BigClown\\usr\\bin\\arm-none-eabi-gdb.exe",
                 "debugServerPath": "${env:SystemDrive}\\BigClown\\usr\\bin\\bcg.cmd",
+                "debugServerArgs": "${workspaceRoot}",
                 "serverStarted": "Connected to target",
                 "serverLaunchTimeout": 5000
             }
