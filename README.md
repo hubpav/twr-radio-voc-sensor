@@ -1,6 +1,6 @@
-# Core Module Firmware Skeleton
-
 <a href="https://www.bigclown.com"><img src="logo.png" alt="BigClown Logo" align="right"></a>
+
+# Core Module Firmware Skeleton
 
 [![Travis](https://img.shields.io/travis/bigclownlabs/bc-core-module/master.svg)](https://travis-ci.org/bigclownlabs/bc-core-module)
 [![Release](https://img.shields.io/github/release/bigclownlabs/bc-core-module.svg)](https://github.com/bigclownlabs/bc-core-module/releases)
