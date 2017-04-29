@@ -1,4 +1,4 @@
-<a href="https://www.bigclown.com"><img src="logo.png" alt="BigClown Logo" align="right"></a>
+<a href="https://www.bigclown.com"><img src="https://s3.eu-central-1.amazonaws.com/bigclown/gh-readme-logo.png" alt="BigClown Logo" style="float: right;></a>
 
 # Core Module Firmware Skeleton
 
@@ -15,7 +15,7 @@ If you want to get more information about Core Module, firmware and how to work 
 
 User's application code (business logic) goes into `app/application.c`.
 The default content works as a *Hello World* example.
-When flashed into Core Module, it toggles LED state with each button press. 
+When flashed into Core Module, it toggles LED state with each button press.
 
 ## License
 
