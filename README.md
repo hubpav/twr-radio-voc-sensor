@@ -1,4 +1,6 @@
-# BigClown Repository bc-core-module
+# Core Module Firmware Skeleton
+
+<a href="https://www.bigclown.com"><img src="logo.png" alt="BigClown Logo" align="right"></a>
 
 [![Travis](https://img.shields.io/travis/bigclownlabs/bc-core-module/master.svg)](https://travis-ci.org/bigclownlabs/bc-core-module)
 [![Release](https://img.shields.io/github/release/bigclownlabs/bc-core-module.svg)](https://github.com/bigclownlabs/bc-core-module/releases)
@@ -10,3 +12,11 @@ This repository contains firmware skeleton for [Core Module](https://shop.bigclo
 If you want to get more information about Core Module, firmware and how to work with it, please follow this link:
 
 **https://doc.bigclown.com/core-module.html**
+
+User's application code (business logic) goes into `app/application.c`.
+The default content works as a *Hello World* example.
+When flashed into Core Module, it toggles LED state with each button press. 
+
+## License
+
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT/) - see the [LICENSE](LICENSE) file for details.
