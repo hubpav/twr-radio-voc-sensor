@@ -1,4 +1,4 @@
-<a href="https://www.bigclown.com"><img src="https://s3.eu-central-1.amazonaws.com/bigclown/gh-readme-logo.png" alt="BigClown Logo" style="float: right;"></a>
+<a href="https://www.bigclown.com"><img src="https://s3.eu-central-1.amazonaws.com/bigclown/gh-readme-logo.png" alt="BigClown Logo" align="right"></a>
 
 # Core Module Firmware Skeleton
 
@@ -20,3 +20,7 @@ When flashed into Core Module, it toggles LED state with each button press.
 ## License
 
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT/) - see the [LICENSE](LICENSE) file for details.
+
+---
+
+Made with ❤ by [BigClown Labs s.r.o.](https://www.bigclown.com) in Czech Republic.
