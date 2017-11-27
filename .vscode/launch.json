@@ -1,53 +1,58 @@
 {
     "version": "0.2.0",
-    "configurations": [ {
-        "name": "Black Magic Probe",
-        "type": "cppdbg",
-        "request": "launch",
-        "cwd": "${workspaceFolder}",
-        "MIMode": "gdb",
-        "targetArchitecture": "arm",
-        "logging": {
-            "engineLogging": true
-        },
-        "program": "${workspaceRoot}\\out\\debug\\firmware.elf",
-        "miDebuggerPath": "arm-none-eabi-gdb",
-        "customLaunchSetupCommands": [
-            {
-              "text": "cd ${workspaceRoot}"
+    "configurations": [
+        {
+            "name": "Black Magic Probe",
+            "type": "cppdbg",
+            "request": "launch",
+            "cwd": "${workspaceRoot}",
+            "MIMode": "gdb",
+            "targetArchitecture": "arm",
+            "logging": {
+                "engineLogging": true
             },
-            {
-              "text": "target extended-remote \\\\.\\COM9" /* replace with your COM or /dev/ttyX */
-            },
-            {
-              "text": "monitor swdp_scan"
-            },
-            {
-              "text": "attach 1"
-            },
-            {
-              "text": "file firmware.elf"
-            },
-            {
-              "text": "load"
-            },
-            {
-              "text": "set mem inaccessible-by-default off"
-            },
-            {
-              "text": "break main"
+            "program": "${workspaceRoot}\\out\\debug\\firmware.elf",
+            "miDebuggerPath": "arm-none-eabi-gdb",
+            "customLaunchSetupCommands": [
+                {
+                  "text": "cd ${workspaceRoot}\\out\\debug"
+                },
+                {
+                  "text": "target extended-remote \\\\.\\COM9" /* replace with your COM or /dev/ttyX */
+                },
+                {
+                  "text": "monitor swdp_scan"
+                },
+                {
+                  "text": "attach 1"
+                },
+                {
+                  "text": "file firmware.elf"
+                },
+                {
+                  "text": "load"
+                },
+                {
+                    "text": "cd ${workspaceRoot}"
+                  },
+                {
+                  "text": "set mem inaccessible-by-default off"
+                },
+                {
+                  "text": "break main"
+                }
+              ],
+            "serverLaunchTimeout": 10000,
+            "windows": {
+                "miDebuggerPath": "arm-none-eabi-gdb.exe"
             }
-          ],
-        "serverLaunchTimeout": 10000,
-        "windows": {
-            "miDebuggerPath": "arm-none-eabi-gdb.exe"
-        }
-    },
-    {
+        },
+
+        {
         "name": "C MCU JLink  Launch",
         "type": "cppdbg",
         "request": "launch",
-        "preLaunchTask": "build",
+        /*"preLaunchTask": "build",*/
         "cwd": "${workspaceRoot}",
         "MIMode": "gdb",
         "miDebuggerServerAddress": "localhost:2331",
