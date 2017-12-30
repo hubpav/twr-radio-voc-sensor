@@ -8,9 +8,6 @@ bc_button_t button;
 
 void button_event_handler(bc_button_t *self, bc_button_event_t event, void *event_param)
 {
-    (void) self;
-    (void) event_param;
-
     if (event == BC_BUTTON_EVENT_PRESS)
     {
         bc_led_set_mode(&led, BC_LED_MODE_TOGGLE);
