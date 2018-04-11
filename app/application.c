@@ -2,13 +2,16 @@
 
 #include <bc_gfx.h>
 
-#define VOC_TAG_UPDATE_INTERVAL (1 * 1000)
+#define VOC_TAG_UPDATE_INTERVAL (5 * 1000)
 #define TEMPERATURE_TAG_UPDATE_INTERVAL (5 * 1000)
 #define HUMIDITY_TAG_UPDATE_INTERVAL (5 * 1000)
+#define BATTERY_UPDATE_INTERVAL (1 * 60 * 1000)
 #define APPLICATION_TASK_ID 0
 #define VOC_TAG_GRAPH (60 * 1000)
 #define TEMPERATURE_TAG_GRAPH (5 * 60 * 1000)
 #define HUMIDITY_TAG_GRAPH (5 * 60 * 1000)
+
+#define HUMIDITY_TAG_REVISION BC_TAG_HUMIDITY_REVISION_R3
 
 // LED instance
 bc_led_t led;
@@ -46,6 +49,19 @@ void button_event_handler(bc_button_t *self, bc_button_event_t event, void *even
     }
 }
 
+void battery_event_handler(bc_module_battery_event_t event, void *event_param)
+{
+    (void) event;
+    (void) event_param;
+
+    float voltage;
+
+    if (bc_module_battery_get_voltage(&voltage))
+    {
+        bc_radio_pub_battery(&voltage);
+    }
+}
+
 void compensation(void)
 {
     static float c_temperature = -100;
@@ -78,6 +94,8 @@ void temperature_tag_event_handler(bc_tag_temperature_t *self, bc_tag_temperatur
             compensation();
 
             bc_data_stream_feed(&temperature_stream, &temperature);
+
+            bc_radio_pub_temperature(BC_RADIO_PUB_CHANNEL_R1_I2C0_ADDRESS_DEFAULT, &temperature);
         }
     }
 
@@ -95,6 +113,8 @@ void humidity_tag_event_handler(bc_tag_humidity_t *self, bc_tag_humidity_event_t
             compensation();
 
             bc_data_stream_feed(&humidity_stream, &humidity);
+
+            bc_radio_pub_humidity(BC_RADIO_PUB_CHANNEL_R3_I2C0_ADDRESS_DEFAULT, &humidity);
         }
     }
 
@@ -112,6 +132,8 @@ void sgp30_event_handler(bc_sgp30_t *self, bc_sgp30_event_t event, void *event_p
         if (bc_sgp30_get_tvoc_ppb(&sgp30, &value))
         {
             tvoc = value;
+            int radio_tvoc = value;
+            bc_radio_pub_int("voc-sensor/0:0/tvoc", &radio_tvoc);
         }
 
         bc_data_stream_feed(&tvoc_stream, &tvoc);
@@ -129,6 +151,11 @@ void application_init(void)
     // Initialize button
     bc_button_init(&button, BC_GPIO_BUTTON, BC_GPIO_PULL_DOWN, false);
     bc_button_set_event_handler(&button, button_event_handler, NULL);
+    
+    // Initialize battery
+    bc_module_battery_init(BC_MODULE_BATTERY_FORMAT_STANDARD);
+    bc_module_battery_set_event_handler(battery_event_handler, NULL);
+    bc_module_battery_set_update_interval(BATTERY_UPDATE_INTERVAL);
 
     bc_sgp30_init(&sgp30, BC_I2C_I2C0, 0x58);
     bc_sgp30_set_event_handler(&sgp30, sgp30_event_handler, NULL);
@@ -140,13 +167,16 @@ void application_init(void)
     bc_tag_temperature_set_event_handler(&tag_temperature, temperature_tag_event_handler, NULL);
     bc_tag_temperature_set_update_interval(&tag_temperature, TEMPERATURE_TAG_UPDATE_INTERVAL);
 
-    bc_tag_humidity_init(&tag_humidity, BC_TAG_HUMIDITY_REVISION_R3, BC_I2C_I2C0, BC_TAG_HUMIDITY_I2C_ADDRESS_DEFAULT);
+    bc_tag_humidity_init(&tag_humidity, HUMIDITY_TAG_REVISION, BC_I2C_I2C0, BC_TAG_HUMIDITY_I2C_ADDRESS_DEFAULT);
     bc_tag_humidity_set_update_interval(&tag_humidity, HUMIDITY_TAG_UPDATE_INTERVAL);
     bc_tag_humidity_set_event_handler(&tag_humidity, humidity_tag_event_handler, NULL);
 
     bc_data_stream_init(&tvoc_stream, 1, &tvoc_stream_buffer);
     bc_data_stream_init(&temperature_stream, 1, &temperature_stream_buffer);
     bc_data_stream_init(&humidity_stream, 1, &humidity_stream_buffer);
+
+    bc_radio_init(BC_RADIO_MODE_NODE_SLEEPING);
+    bc_radio_pairing_request("wireless-voc-sensor", VERSION);
 
     bc_module_lcd_init();
     gfx = bc_module_lcd_get_gfx();
