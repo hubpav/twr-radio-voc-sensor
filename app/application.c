@@ -62,27 +62,6 @@ void battery_event_handler(bc_module_battery_event_t event, void *event_param)
     }
 }
 
-void compensation(void)
-{
-    static float c_temperature = -100;
-    static float c_humidity = -1;
-
-    if (isnan(temperature) || isnan(humidity))
-    {
-        return;
-    }
-
-    if ((fabsf(temperature - c_temperature) < 1.f) && fabsf(humidity - c_humidity) < 5.f )
-    {
-        return;
-    }
-
-    c_temperature = temperature;
-    c_humidity = humidity;
-
-    bc_sgp30_set_compensation(&sgp30, &temperature, &humidity);
-}
-
 void temperature_tag_event_handler(bc_tag_temperature_t *self, bc_tag_temperature_event_t event, void *event_param)
 {
     temperature = NAN;
@@ -91,11 +70,19 @@ void temperature_tag_event_handler(bc_tag_temperature_t *self, bc_tag_temperatur
     {
         if (bc_tag_temperature_get_temperature_celsius(self, &temperature))
         {
-            compensation();
-
             bc_data_stream_feed(&temperature_stream, &temperature);
 
             bc_radio_pub_temperature(BC_RADIO_PUB_CHANNEL_R1_I2C0_ADDRESS_DEFAULT, &temperature);
+
+            float avg_temperature = NAN;
+
+            float avg_humidity = NAN;
+
+            bc_data_stream_get_average(&temperature_stream, &avg_temperature);
+
+            bc_data_stream_get_average(&humidity_stream, &avg_humidity);
+
+            bc_sgp30_set_compensation(&sgp30, isnan(avg_temperature) ? NULL : &avg_temperature, isnan(avg_humidity) ? NULL: &avg_humidity);
         }
     }
 
@@ -110,8 +97,6 @@ void humidity_tag_event_handler(bc_tag_humidity_t *self, bc_tag_humidity_event_t
     {
         if (bc_tag_humidity_get_humidity_percentage(self, &humidity))
         {
-            compensation();
-
             bc_data_stream_feed(&humidity_stream, &humidity);
 
             bc_radio_pub_humidity(BC_RADIO_PUB_CHANNEL_R3_I2C0_ADDRESS_DEFAULT, &humidity);
@@ -151,9 +136,9 @@ void application_init(void)
     // Initialize button
     bc_button_init(&button, BC_GPIO_BUTTON, BC_GPIO_PULL_DOWN, false);
     bc_button_set_event_handler(&button, button_event_handler, NULL);
-    
+
     // Initialize battery
-    bc_module_battery_init(BC_MODULE_BATTERY_FORMAT_STANDARD);
+    bc_module_battery_init();
     bc_module_battery_set_event_handler(battery_event_handler, NULL);
     bc_module_battery_set_update_interval(BATTERY_UPDATE_INTERVAL);
 
