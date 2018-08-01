@@ -1,0 +1,15 @@
+article: https://www.bigclown.com/doc/projects/wireless-voc-sensor/
+images:
+  - title:
+    url: https://www.bigclown.com/doc/projects/wireless-voc-sensor/project-image.png
+assembly:
+  - name: BigClown VOC Tag
+  - name: BigClown Temperature Tag
+    optional: true
+  - name: BigClown Humidity Tag
+    optional: true
+  - name: BigClown Core Module
+  - name: BigClown Tag Module
+    optional: true
+  - name: BigClown Battery Module
+    optional: true
