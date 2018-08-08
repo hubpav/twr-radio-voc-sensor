@@ -161,7 +161,7 @@ void application_init(void)
     bc_data_stream_init(&humidity_stream, 1, &humidity_stream_buffer);
 
     bc_radio_init(BC_RADIO_MODE_NODE_SLEEPING);
-    bc_radio_pairing_request("wireless-voc-sensor", VERSION);
+    bc_radio_pairing_request("voc-sensor", VERSION);
 
     bc_module_lcd_init();
     gfx = bc_module_lcd_get_gfx();
