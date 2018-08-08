@@ -1,23 +1,17 @@
 <a href="https://www.bigclown.com/"><img src="https://bigclown.sirv.com/logo.png" width="200" alt="BigClown Logo" align="right"></a>
 
-# Wireless VOC tag sensor project
+# Firmware for BigClown Radio VOC sensor project
 
-
-[![Travis](https://img.shields.io/travis/bigclownlabs/bcf-skeleton/master.svg)](https://travis-ci.org/bigclownlabs/bcf-wireless-voc-sensor)
-[![Release](https://img.shields.io/github/release/bigclownlabs/bcf-skeleton.svg)](https://github.com/bigclownlabs/bcf-wireless-voc-sensor/releases)
-[![License](https://img.shields.io/github/license/bigclownlabs/bcf-skeleton.svg)](https://github.com/bigclownlabs/bcf-wireless-voc-sensor/blob/master/LICENSE)
+[![Travis](https://img.shields.io/travis/bigclownlabs/bcf-radio-voc-sensor/master.svg)](https://travis-ci.org/bigclownlabs/bcf-radio-voc-sensor)
+[![Release](https://img.shields.io/github/release/bigclownlabs/bcf-radio-voc-sensor.svg)](https://github.com/bigclownlabs/bcf-radio-voc-sensor/releases)
+[![License](https://img.shields.io/github/license/bigclownlabs/bcf-radio-voc-sensor.svg)](https://github.com/bigclownlabs/bcf-radio-voc-sensor/blob/master/LICENSE)
 [![Twitter](https://img.shields.io/twitter/follow/BigClownLabs.svg?style=social&label=Follow)](https://twitter.com/BigClownLabs)
 
+Project with VOC Tag sending values and displaying them on the LCD Module.
 
-The project is explained in documentaion in Projects section https://www.bigclown.com/doc/.
+See the project documentation on this link:
 
-This repository contains firmware for [Core Module](https://shop.bigclown.com/core-module).
-
-If you want to get more information about Core Module, firmware and how to work with it, please follow this link:
-
-**https://www.bigclown.com/doc/firmware/basic-overview/**
-
-
+**https://www.bigclown.com/doc/projects/radio-voc-sensor/**
 
 ## License
 
