@@ -20,7 +20,7 @@ bc_led_t led;
 bc_button_t button;
 
 bc_tmp112_t tmp112;
-bc_sgp30_t sgp30;
+bc_tag_voc_t tag_voc;
 bc_tag_temperature_t tag_temperature;
 bc_tag_humidity_t tag_humidity;
 
@@ -82,7 +82,7 @@ void temperature_tag_event_handler(bc_tag_temperature_t *self, bc_tag_temperatur
 
             bc_data_stream_get_average(&humidity_stream, &avg_humidity);
 
-            bc_sgp30_set_compensation(&sgp30, isnan(avg_temperature) ? NULL : &avg_temperature, isnan(avg_humidity) ? NULL: &avg_humidity);
+            bc_tag_voc_set_compensation(&tag_voc, isnan(avg_temperature) ? NULL : &avg_temperature, isnan(avg_humidity) ? NULL: &avg_humidity);
         }
     }
 
@@ -106,15 +106,15 @@ void humidity_tag_event_handler(bc_tag_humidity_t *self, bc_tag_humidity_event_t
     bc_scheduler_plan_now(APPLICATION_TASK_ID);
 }
 
-void sgp30_event_handler(bc_sgp30_t *self, bc_sgp30_event_t event, void *event_param)
+void voc_tag_event_handler(bc_tag_voc_t *self, bc_tag_voc_event_t event, void *event_param)
 {
     tvoc = NAN;
 
-    if (event == BC_SGP30_EVENT_UPDATE)
+    if (event == BC_TAG_VOC_EVENT_UPDATE)
     {
         uint16_t value;
 
-        if (bc_sgp30_get_tvoc_ppb(&sgp30, &value))
+        if (bc_tag_voc_get_tvoc_ppb(&tag_voc, &value))
         {
             tvoc = value;
             int radio_tvoc = value;
@@ -142,9 +142,9 @@ void application_init(void)
     bc_module_battery_set_event_handler(battery_event_handler, NULL);
     bc_module_battery_set_update_interval(BATTERY_UPDATE_INTERVAL);
 
-    bc_sgp30_init(&sgp30, BC_I2C_I2C0, 0x58);
-    bc_sgp30_set_event_handler(&sgp30, sgp30_event_handler, NULL);
-    bc_sgp30_set_update_interval(&sgp30, VOC_TAG_UPDATE_INTERVAL);
+    bc_tag_voc_init(&tag_voc, BC_I2C_I2C0);
+    bc_tag_voc_set_event_handler(&tag_voc, voc_tag_event_handler, NULL);
+    bc_tag_voc_set_update_interval(&tag_voc, VOC_TAG_UPDATE_INTERVAL);
 
     bc_tmp112_init(&tmp112, BC_I2C_I2C0, 0x49);
 
