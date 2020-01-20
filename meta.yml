@@ -1,7 +1,7 @@
 article: https://www.bigclown.com/doc/projects/radio-voc-sensor/
-images:
-  - title:
-    url: https://www.bigclown.com/doc/projects/radio-voc-sensor/project-image.png
+#images:
+#  - title:
+#    url: https://www.bigclown.com/doc/projects/radio-voc-sensor/project-image.png
 assembly:
   - name: BigClown VOC Tag
   - name: BigClown Temperature Tag
