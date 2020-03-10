@@ -3,13 +3,13 @@ article: https://www.bigclown.com/doc/projects/radio-voc-sensor/
 #  - title:
 #    url: https://www.bigclown.com/doc/projects/radio-voc-sensor/project-image.png
 assembly:
-  - name: BigClown VOC Tag
-  - name: BigClown Temperature Tag
+  - name: HARDWARIO VOC Tag
+  - name: HARDWARIO Temperature Tag
     optional: true
   - name: BigClown Humidity Tag
     optional: true
-  - name: BigClown Core Module
-  - name: BigClown Tag Module
+  - name: HARDWARIO Core Module
+  - name: HARDWARIO Tag Module
     optional: true
-  - name: BigClown Battery Module
+  - name: HARDWARIO Battery Module
     optional: true
