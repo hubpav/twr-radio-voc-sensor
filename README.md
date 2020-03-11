@@ -11,7 +11,7 @@ Project with VOC Tag sending values and displaying them on the LCD Module.
 
 See the project documentation on this link:
 
-**https://www.bigclown.com/doc/projects/radio-voc-sensor/**
+**https://developers.hardwario.com/projects/radio-voc-sensor**
 
 ## License
 
