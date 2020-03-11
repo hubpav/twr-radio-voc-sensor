@@ -1,4 +1,4 @@
-article: https://www.bigclown.com/doc/projects/radio-voc-sensor/
+article: https://developers.hardwario.com/projects/radio-voc-sensor
 #images:
 #  - title:
 #    url: https://www.bigclown.com/doc/projects/radio-voc-sensor/project-image.png
@@ -6,7 +6,7 @@ assembly:
   - name: HARDWARIO VOC Tag
   - name: HARDWARIO Temperature Tag
     optional: true
-  - name: BigClown Humidity Tag
+  - name: HARDWARIO Humidity Tag
     optional: true
   - name: HARDWARIO Core Module
   - name: HARDWARIO Tag Module
