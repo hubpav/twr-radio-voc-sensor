@@ -10,6 +10,7 @@ script:
   - make release OUT=bcf-radio-voc-sensor-${TRAVIS_TAG} VERSION=${TRAVIS_TAG}
 deploy:
   provider: releases
+  token: $GITHUB_TOKEN
   cleanup: false
   file_glob: true
   file: out/release/*.bin
