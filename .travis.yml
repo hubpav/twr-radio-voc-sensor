@@ -9,11 +9,10 @@ addons:
 script:
   - make release OUT=bcf-radio-voc-sensor-${TRAVIS_TAG} VERSION=${TRAVIS_TAG}
 deploy:
-  skip_cleanup: true
+  provider: releases
+  cleanup: false
   file_glob: true
   file: out/release/*.bin
-  api_key: ${GITHUB_KEY}
-  provider: releases
   overwrite: true
   on:
     tags: true
