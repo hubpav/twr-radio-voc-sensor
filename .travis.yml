@@ -11,10 +11,10 @@ script:
 deploy:
   provider: releases
   token: $GITHUB_TOKEN
-  cleanup: false
   file_glob: true
   file: out/release/*.bin
   overwrite: true
+  skip_cleanup: true
   on:
     tags: true
 notifications:
