@@ -2,7 +2,7 @@
 
 # Firmware for HARDWARIO Radio VOC sensor project
 
-[![Travis](https://img.shields.io/travis/bigclownlabs/bcf-radio-voc-sensor/master.svg)](https://travis-ci.org/bigclownlabs/bcf-radio-voc-sensor)
+[![Build Status](https://www.travis-ci.com/hardwario/twr-radio-voc-sensor.svg?branch=master)](https://www.travis-ci.com/hardwario/twr-radio-voc-sensor)
 [![Release](https://img.shields.io/github/release/bigclownlabs/bcf-radio-voc-sensor.svg)](https://github.com/bigclownlabs/bcf-radio-voc-sensor/releases)
 [![License](https://img.shields.io/github/license/bigclownlabs/bcf-radio-voc-sensor.svg)](https://github.com/bigclownlabs/bcf-radio-voc-sensor/blob/master/LICENSE)
 [![Twitter](https://img.shields.io/twitter/follow/hardwario_en.svg?style=social&label=Follow)](https://twitter.com/hardwario_en)
